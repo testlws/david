@@ -1,20 +1,37 @@
 <template>
     <v-row>
 
-        <sidebar></sidebar>
+        <sidebar v-bind:id=this.id></sidebar>
 
-        <v-col md="9" class="mt-3 mb-3">
-            <v-row>
-                <v-col v-for="product in products" :key="product.id" lg="4" md="6" class="mb-4">
+        <v-col md="9" class="pt-0 mb-3">
+            <v-row align="stretch">
+                <v-col v-for="link in links" :key="link.id" lg="4" md="6" class="mb-4">
                     <v-card class="h-100">
-                        <a href="#"><v-img :src="product.photo" alt=""/></a>
-                        <v-card-title>
-                            <a href="#">{{ product.name }}</a>
+                        <a href="#"><v-img :src="`/storage/images/${link.image}`" alt=""/></a>
+                        <v-card-title style="padding-bottom:0;">
+                            <a href="#">{{ link.title }}</a>
                         </v-card-title>
-                        <v-card-subtitle>
-                            <h3>${{ product.price }}</h3>
-                        </v-card-subtitle>
-                        <v-card-text>{{ product.description }}</v-card-text>
+                        <v-card-text>
+                            <v-row
+                                align="center"
+                                class="mx-0"
+                            >
+                                <v-rating
+                                :value="4.5"
+                                color="amber"
+                                dense
+                                half-increments
+                                readonly
+                                size="14"
+                                style="padding-bottom: 16px;"
+                                ></v-rating>
+
+                                <div class="grey--text ml-4" style="padding-bottom: 16px;">
+                                4.5 (413)
+                                </div>
+                            </v-row>
+
+                            {{ link.description }}</v-card-text>
                     </v-card>
                 </v-col>
             </v-row>
@@ -28,17 +45,26 @@
     import Sidebar from "../components/Sidebar";
 
     export default {
+        props: ['id'],
         data() {
             return {
-                products: {}
+                links: {}
             }
         },
         mounted() {
-            axios.get('/api/products')
+            axios.get('/api/links/'+ this.id)
                 .then(response => {
-                    this.products = response.data.data;
+                    this.links = response.data.data;
                 });
         },
+        watch: {
+            id: function (val) {
+                axios.get('/api/links/'+ this.id)
+                    .then(response => {
+                        this.links = response.data.data;
+                    });
+            },
+        },        
         components: {
             'sidebar': Sidebar
         }

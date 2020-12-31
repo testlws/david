@@ -1,24 +1,37 @@
 <template>
     <v-col md="3">
-        <h1 class="my-4">Shop Name</h1>
         <v-card>
             <v-list dense>
-                <v-list-item link href="#">
+                <v-subheader>CATEGORIES</v-subheader>
+                <v-list-item-group
+                mandatory
+                color="indigo"
+            >
+                <v-list-item v-for="(category, index) in categories" :key="`item-${index}`" :value="category.id" link :to="`/category/${category.id}/offers`">
                     <v-list-item-content>
-                        <v-list-item-title>Category 1</v-list-item-title>
+                        <v-list-item-title>{{ category.title }} ({{ category.links_count }})</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link href="#">
-                    <v-list-item-content>
-                        <v-list-item-title>Category 2</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link href="#">
-                    <v-list-item-content>
-                        <v-list-item-title>Category 3</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                </v-list-item-group>
             </v-list>
         </v-card>
     </v-col>
 </template>
+
+<script>
+    export default {
+        props: ['id'],
+        data() {
+            return {
+                categories: {},
+            }
+        },
+        mounted() {
+            this.currentCat = this.id;
+            axios.get('/api/categories')
+                .then(response => {
+                    this.categories = response.data.data;
+                });
+        },
+    }
+</script>
