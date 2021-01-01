@@ -10,7 +10,7 @@ class LinkController extends Controller
 {
     public function index()
     {
-        return LinkResource::collection(Link::all());
+        return LinkResource::collection(Link::orderBy('title')->get());
     }
 
     public function byCategory($category_id)

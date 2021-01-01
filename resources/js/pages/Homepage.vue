@@ -3,12 +3,12 @@
 
         <sidebar v-bind:id=this.id></sidebar>
 
-        <v-col md="9" class="pt-0 mb-3">
+        <v-col md="9" class="mb-3">
             <v-row align="stretch">
                 <v-col v-for="link in links" :key="link.id" lg="4" md="6" class="mb-4">
                     <v-card class="h-100">
                         <a href="#"><v-img :src="`/storage/images/${link.image}`" alt=""/></a>
-                        <v-card-title style="padding-bottom:0;">
+                        <v-card-title>
                             <a href="#">{{ link.title }}</a>
                         </v-card-title>
                         <v-card-text>
