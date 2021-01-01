@@ -12,7 +12,7 @@
                 color="white"
                 hide-no-data
                 hide-selected
-                item-text="Description"
+                item-text="title"
                 item-value="API"
                 label="Search "
                 placeholder="Start typing to Search"
@@ -29,7 +29,7 @@
 <script>
   export default {
     data: () => ({
-      descriptionLimit: 60,
+      titleLimit: 60,
       entries: [],
       isLoading: false,
       model: null,
@@ -49,11 +49,11 @@
       },
       items () {
         return this.entries.map(entry => {
-          const Description = entry.Description.length > this.descriptionLimit
-            ? entry.Description.slice(0, this.descriptionLimit) + '...'
-            : entry.Description
+          const title = entry.title.length > this.titleLimit
+            ? entry.title.slice(0, this.titleLimit) + '...'
+            : entry.title
 
-          return Object.assign({}, entry, { Description })
+          return Object.assign({}, entry, { title })
         })
       },
     },
@@ -69,10 +69,11 @@
         this.isLoading = true
 
         // Lazily load input items
-        fetch('https://api.publicapis.org/entries')
+        fetch('/api/links')
           .then(res => res.json())
           .then(res => {
-            const { count, entries } = res
+            const count = res.data.length;
+            const entries= res.data;
             this.count = count
             this.entries = entries
           })

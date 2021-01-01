@@ -2001,7 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      descriptionLimit: 60,
+      titleLimit: 60,
       entries: [],
       isLoading: false,
       model: null,
@@ -2024,9 +2024,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       return this.entries.map(function (entry) {
-        var Description = entry.Description.length > _this2.descriptionLimit ? entry.Description.slice(0, _this2.descriptionLimit) + '...' : entry.Description;
+        var title = entry.title.length > _this2.titleLimit ? entry.title.slice(0, _this2.titleLimit) + '...' : entry.title;
         return Object.assign({}, entry, {
-          Description: Description
+          title: title
         });
       });
     }
@@ -2041,11 +2041,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.isLoading) return;
       this.isLoading = true; // Lazily load input items
 
-      fetch('https://api.publicapis.org/entries').then(function (res) {
+      fetch('/api/links').then(function (res) {
         return res.json();
       }).then(function (res) {
-        var count = res.count,
-            entries = res.entries;
+        var count = res.data.length;
+        var entries = res.data;
         _this3.count = count;
         _this3.entries = entries;
       })["catch"](function (err) {
@@ -19989,7 +19989,7 @@ var render = function() {
               color: "white",
               "hide-no-data": "",
               "hide-selected": "",
-              "item-text": "Description",
+              "item-text": "title",
               "item-value": "API",
               label: "Search ",
               placeholder: "Start typing to Search",
