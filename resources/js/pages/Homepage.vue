@@ -6,8 +6,15 @@
         <v-col md="9" class="mb-3">
             <v-row align="stretch">
                 <v-col v-for="link in links" :key="link.id" lg="4" md="6" class="mb-4">
+                    <v-lazy
+        :options="{
+          threshold: .5
+        }"
+        min-height="200"
+        transition="fade-transition"
+      >
                     <v-card class="h-100">
-                        <a href="#"><v-img :src="`/storage/images/${link.image}`" alt=""/></a>
+                        <a href="#" class="d-block" v-ripple="{ center: true }"><v-img :src="`/storage/images/${link.image}`" alt=""/></a>
                         <v-card-title>
                             <a href="#">{{ link.title }}</a>
                         </v-card-title>
@@ -33,6 +40,7 @@
 
                             {{ link.description }}</v-card-text>
                     </v-card>
+                    </v-lazy>
                 </v-col>
             </v-row>
         </v-col>
@@ -46,12 +54,22 @@
 
     export default {
         props: ['id'],
+        metaInfo: {
+            title: 'Default App Title',
+            titleTemplate: '%s | Coin Guide',
+            meta: [
+                { charset: 'utf-8' },
+                { name: 'description', content: 'gator' },
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+            ]            
+        },        
         data() {
             return {
                 links: {}
             }
         },
         mounted() {
+            document.title = 'test';
             axios.get('/api/links/'+ this.id)
                 .then(response => {
                     this.links = response.data.data;

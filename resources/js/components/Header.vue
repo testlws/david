@@ -21,7 +21,21 @@
                 filled
                 dense
                 hide-details
-        ></v-autocomplete>        
+        >
+<template slot="item" slot-scope="{ item, tile }">
+        <v-list-tile-content style="width:100%">
+            <div class="float-left">{{ item.title }}</div>
+
+<v-chip
+      class="ma-1 float-right"
+      color="red"
+      text-color="white"
+    >
+      Red Chip
+    </v-chip>
+        </v-list-tile-content>
+    </template>
+            </v-autocomplete>        
         </v-col>
     </v-app-bar>
 </template>
@@ -29,7 +43,7 @@
 <script>
   export default {
     data: () => ({
-      titleLimit: 60,
+      titleLimit: 20,
       entries: [],
       isLoading: false,
       model: null,
