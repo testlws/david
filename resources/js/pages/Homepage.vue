@@ -2,7 +2,6 @@
     <v-row>
 
         <sidebar v-bind:id=this.id></sidebar>
-
         <v-col md="9" class="mb-3">
             <v-row align="stretch">
                 <v-col v-for="link in links" :key="link.id" lg="4" md="6" class="mb-4">
@@ -70,14 +69,14 @@
         },
         mounted() {
             document.title = 'test';
-            axios.get('/api/links/'+ this.id)
+            axios.get('links/'+ this.id)
                 .then(response => {
                     this.links = response.data.data;
                 });
         },
         watch: {
             id: function (val) {
-                axios.get('/api/links/'+ this.id)
+                axios.get('links/'+ this.id)
                     .then(response => {
                         this.links = response.data.data;
                     });

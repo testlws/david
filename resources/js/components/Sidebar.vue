@@ -28,7 +28,7 @@
         },
         mounted() {
             this.currentCat = this.id;
-            axios.get('/api/categories')
+            axios.get('categories')
                 .then(response => {
                     this.categories = response.data.data;
                 });

@@ -1,0 +1,71 @@
+<template>
+	<v-layout align-center justify-center>
+    <v-flex xs12 sm8 md4>
+	    <v-card class="elevation-12">
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Reset Password</v-toolbar-title>
+        </v-toolbar>
+          <v-card-text>
+            <v-alert
+              v-model="show"
+              dismissible
+              :type="status">
+              {{ message }}
+            </v-alert>
+
+            <v-form aria-label="Reset Password">
+
+              <v-layout row>
+                <v-flex xs12>
+                  <v-text-field
+                    v-model="input.email"
+                    label="Email"
+                    name="email"></v-text-field>
+                </v-flex>
+              </v-layout>
+
+              <v-btn 
+                color="primary" 
+                @click="validate" 
+                :loading="loading">
+                Send Reset Link
+              </v-btn>
+              <router-link :to="{name: 'auth.login'}">Login</router-link>
+            </v-form>
+          </v-card-text>
+        </v-card>
+    </v-flex>
+	</v-layout>
+</template>
+
+<script>
+  import Auth from '../../auth.js'
+	export default {
+    data: () => ({
+      input: {
+        email: '',
+      },
+      message: '',
+      status: 'success',
+      loading: false,
+      show: false
+    }),
+    methods: {
+      validate() {           
+            this.loading = true
+            this.submit()
+      },
+      submit(){
+        Auth.emailLink(this.input).then(({data}) => {
+          console.log(data)
+          this.status = data.status
+          this.message = data.message
+          this.loading = false
+          this.show = true
+        }).catch((error) => {
+          this.loading = false
+        })
+      }
+    }
+  }
+</script>
