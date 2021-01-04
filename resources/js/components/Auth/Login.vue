@@ -1,26 +1,40 @@
 <template>
-    <div class="container">
-        <div class="card card-default">
-            <div class="card-header">Connexion</div>
-
-            <div class="card-body">
-                <div class="alert alert-danger" v-if="has_error">
-                    <p>Erreur, impossible de se connecter avec ces identifiants.</p>
-                </div>
-                <form autocomplete="off" @submit.prevent="login" method="post">
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" class="form-control" v-model="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-default">Connexion</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  <v-container>
+    <v-layout row class="text-xs-center justify-center">
+      <v-flex xs3 style="background-image: url('/images/login.jpg'); background-position:center center;">
+        <v-card color="transparent" height="500px"></v-card>
+      </v-flex>
+      <v-flex xs4 class="grey lighten-4">
+        <v-container style="position: relative;top: 13%;" class="text-xs-center">
+          <v-card flat>
+            <v-card-title primary-title>
+              <h4>Login</h4>
+            </v-card-title>
+            <v-form @submit.prevent="login">
+            <v-card-text class="text--primary">
+            <v-alert
+                  prominent
+                  type="error"
+                  v-if="has_error"
+                >
+              <v-row align="center">
+                <v-col class="grow">
+                  We were unable to log you in using the credentials you supplied. 
+                </v-col>
+              </v-row>
+            </v-alert>
+            <v-text-field prepend-icon="mdi-email" name="Email" label="Email" v-model="email"></v-text-field>
+            <v-text-field prepend-icon="mdi-lock" name="Password" label="Password" type="password" v-model="password"></v-text-field>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn type="submit" color="info" primary large block>Login</v-btn>
+            </v-card-actions>
+            </v-form>
+          </v-card>
+        </v-container>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -43,22 +57,20 @@
         var redirect = this.$auth.redirect()
         var app = this
         this.$auth.login({
-          params: {
+          rememberMe: true,
+          fetchUser: true,
+          data: {
             email: app.email,
             password: app.password
-          },
-          success: function() {
-            // handle redirection
-            const redirectTo = redirect ? redirect.from.name : this.$auth.user().role === 2 ? 'admin.dashboard' : 'dashboard'
+          }
+        }).then((response) => {
+            const redirectTo = redirect ? redirect.from.name : 'home'
 
             this.$router.push({name: redirectTo})
-          },
-          error: function() {
+        }).catch((error) => {
+            console.log(error.response)
             app.has_error = true
-          },
-          rememberMe: true,
-          fetchUser: true
-        })
+        });        
       }
     }
   }

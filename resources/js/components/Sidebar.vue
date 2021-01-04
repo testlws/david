@@ -20,18 +20,12 @@
 
 <script>
     export default {
-        props: ['id'],
+        props: ['id', 'categories'],
         data() {
             return {
-                categories: {},
             }
         },
         mounted() {
-            this.currentCat = this.id;
-            axios.get('categories')
-                .then(response => {
-                    this.categories = response.data.data;
-                });
         },
     }
 </script>

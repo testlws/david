@@ -11,6 +11,7 @@
         "php": "^7.2.5",
         "artesaos/seotools": "^0.19.1",
         "cviebrock/eloquent-sluggable": "^7.0",
+        "cybercog/laravel-love": "^8.7",
         "cyrildewit/eloquent-viewable": "^5.2",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",

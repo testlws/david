@@ -4,28 +4,6 @@
         <v-toolbar-title>Coin Guide</v-toolbar-title>
         <v-spacer></v-spacer>
         <accountlinks></accountlinks>
-
-        <v-menu bottom left>
-              <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                dark
-                icon
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon>mdi-account-circle</v-icon>
-              </v-btn>
-            </template>
-
-          <v-list>
-              <v-list-item @click="logout">
-                  <v-list-item-title>Logout</v-list-item-title>
-                  <form id="logout-form" action="/logout" method="POST" style="display: none;">
-                      <input type="hidden" name="_token" :value="token">
-                  </form>
-              </v-list-item>
-          </v-list>
-        </v-menu>
         <v-col cols="12" sm="6" md="3">
         <v-autocomplete
                 v-model="model"

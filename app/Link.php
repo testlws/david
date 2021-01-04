@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 
-class Link extends Model implements Viewable
+class Link extends Model implements Viewable, ReactableInterface
 {
     use Sluggable;
     use InteractsWithViews;
+    use Reactable;
 
     protected $guarded = [
         'id',

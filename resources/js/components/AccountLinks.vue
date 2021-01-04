@@ -1,31 +1,36 @@
 <template>
-    <nav id="nav">
-        <ul>
-            <li>eee</li>
-            <!--UNLOGGED-->
-            <li v-if="!$auth.check()" v-for="(route, key) in routes.unlogged" v-bind:key="route.path">
-                <router-link  :to="{ name : route.path }" :key="key">
-                    {{route.name}}
-                </router-link>
-            </li>
-            <!--LOGGED USER-->
-            <li v-if="$auth.check(1)" v-for="(route, key) in routes.user" v-bind:key="route.path">
-                <router-link  :to="{ name : route.path }" :key="key">
-                    {{route.name}}
-                </router-link>
-            </li>
-            <!--LOGGED ADMIN-->
-            <li v-if="$auth.check(2)" v-for="(route, key) in routes.admin" v-bind:key="route.path">
-                <router-link  :to="{ name : route.path }" :key="key">
-                    {{route.name}}
-                </router-link>
-            </li>
-            <!--LOGOUT-->
-            <li v-if="$auth.check()">
-                <a href="#" @click.prevent="$auth.logout()">Logout</a>
-            </li>
-        </ul>
-    </nav>
+    <v-btn
+        color="info"
+        class="ma-2 white--text"
+        v-if="!$auth.check()"
+        link :to="`/login`"
+      >
+        Login
+        <v-icon
+          right
+          dark
+        >
+          mdi-login
+        </v-icon>
+    </v-btn>
+        <v-menu bottom left v-else-if="$auth.check()">
+              <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                dark
+                icon
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-account-circle</v-icon>
+              </v-btn>
+            </template>
+
+          <v-list>
+              <v-list-item @click.prevent="$auth.logout()">
+                  <v-list-item-title>Logout</v-list-item-title>
+              </v-list-item>
+          </v-list>
+        </v-menu>
 </template>
 
 <script>

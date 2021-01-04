@@ -1,38 +1,43 @@
 <template>
-    <div class="container">
-        <div class="card card-default">
-            <div class="card-header">Inscription</div>
+  <v-container class="text-xs-center justify-center">
+    <v-card style="max-width:1000px">
+    <v-row class="text-xs-center justify-center">
+    <v-col cols="4" class="pa-0">
+        <v-card class="rounded-0" style="flex-grow:1; background-image: url('/images/register.jpg'); background-position:center center;" color="transparent" min-height="500px"></v-card>
+    </v-col>
+    <v-col cols="8">
+        <v-card flat>
+            <v-card-title primary-title>
+              <h4>Create your account. It's FREE.</h4>
+            </v-card-title>
+            <v-form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
+              <v-card-text class="text--primary">
+              <v-alert
+                  prominent
+                  type="error"
+                  v-if="has_error && !success"
+                >
+                <v-row align="center">
+                  <v-col class="grow">
+                    Please, correct the errors below to proceed with the creation of yoour account.
+                  </v-col>
+                </v-row>
+              </v-alert>                
+                <v-text-field prepend-icon="mdi-email" name="email" label="Email" v-model="email"></v-text-field>
+                <v-text-field prepend-icon="mdi-lock" name="password" label="Password" type="password" v-model="password"></v-text-field>
+                <v-text-field prepend-icon="mdi-lock" name="password_confirmation" label="Password confirmation" type="password" v-model="password_confirmation"></v-text-field>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn type="submit" color="info" primary large block>Register</v-btn>
+              </v-card-actions>
+            </v-form>
+          </v-card>
+    </v-col>
+    </v-row>
+    </v-card>
+  </v-container>
 
-            <div class="card-body">
-                <div class="alert alert-danger" v-if="has_error && !success">
-                    <p v-if="error == 'registration_validation_error'">Erreur(s) de validation, veuillez consulter le(s) message(s) ci-dessous.</p>
-                    <p v-else>Erreur, impossible de s'inscrire pour le moment. Si le problème persiste, veuillez contacter un administrateur.</p>
-                </div>
-
-                <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
-
-                    <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.email }">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email">
-                        <span class="help-block" v-if="has_error && errors.email">{{ errors.email }}</span>
-                    </div>
-
-                    <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" class="form-control" v-model="password">
-                        <span class="help-block" v-if="has_error && errors.password">{{ errors.password }}</span>
-                    </div>
-
-                    <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
-                        <label for="password_confirmation">Confirmation mot de passe</label>
-                        <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation">
-                    </div>
-
-                    <button type="submit" class="btn btn-default">Inscription</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    
 </template>
 <script>
   export default {
@@ -57,18 +62,14 @@
             email: app.email,
             password: app.password,
             password_confirmation: app.password_confirmation
-          },
-          success: function () {
+          }}).then((response) => {
             app.success = true
             this.$router.push({name: 'login', params: {successRegistrationRedirect: true}})
-          },
-          error: function (res) {
-            console.log(res.response.data.errors)
+        }).catch((error) => {
             app.has_error = true
-            app.error = res.response.data.error
-            app.errors = res.response.data.errors || {}
-          }
-        })
+            app.error = error
+            app.errors = error.response.data.errors || {}
+        });
       }
     }
   }

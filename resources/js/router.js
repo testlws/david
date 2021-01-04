@@ -9,7 +9,7 @@ import Register from './components/Auth/Register.vue'
 import Login from './components/Auth/Login.vue'
 import ResetEmail from './components/Auth/ResetEmail.vue'
 import ResetPassword from './components/Auth/ResetPassword.vue'
-
+import NotFound from './components/NotFound.vue'
 
 // Routes
 const routes = [
@@ -30,6 +30,7 @@ const routes = [
     },
     {
         path: '/category/:id/offers',
+        name: 'category',
         props: true,
         component: Homepage
     },
@@ -48,7 +49,8 @@ const routes = [
         meta: {
             auth: false
         }                    
-    }
+    },
+    {path: '*', component: NotFound}
 ]
 
 const router = new VueRouter({
