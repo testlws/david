@@ -3,7 +3,7 @@
         color="info"
         class="ma-2 white--text"
         v-if="!$auth.check()"
-        link :to="`/login`"
+        link :to="{ path: '/login', query: { from: currentRoutePath }}"
       >
         Login
         <v-icon
@@ -67,8 +67,12 @@
         }
       }
     },
+    computed: {
+      currentRoutePath() {
+          return this.$route.path;
+      }
+    },
     mounted() {
-      console.log("account links mounted");
     }
   }
 </script>

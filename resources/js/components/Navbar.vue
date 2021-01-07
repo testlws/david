@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" app src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" dark>
         <v-list dense>
             <v-list-item link exact :to="{ name: 'home' }">
                 <v-list-item-action>

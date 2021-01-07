@@ -1,6 +1,6 @@
 <template>
-    <v-col md="3">
-        <v-card>
+    <v-col cols="12" xs="12" md="3">
+        <v-card :loading="categoriesLoading">
             <v-list dense>
                 <v-subheader>CATEGORIES</v-subheader>
                 <v-list-item-group
@@ -8,6 +8,9 @@
                 color="indigo"
             >
                 <v-list-item v-for="(category, index) in categories" :key="`item-${index}`" :value="category.id" link :to="`/category/${category.id}/offers`">
+                    <v-list-item-icon>
+                        <v-icon v-text="category.icon"></v-icon>
+                    </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>{{ category.title }} ({{ category.links_count }})</v-list-item-title>
                     </v-list-item-content>
@@ -20,7 +23,7 @@
 
 <script>
     export default {
-        props: ['id', 'categories'],
+        props: ['id', 'categories', 'categoriesLoading'],
         data() {
             return {
             }

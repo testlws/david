@@ -29,7 +29,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'AuthController@login');
     Route::get('refresh', 'AuthController@refresh');
 
-    Route::group(['middleware' => 'auth:api'], function(){
+    Route::group(['middleware' => 'auth:api'], function(){   
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
     });
@@ -39,3 +39,11 @@ Route::get('products', 'Api\ProductController@index');
 Route::get('categories', 'Api\CategoryController@index');
 Route::get('links', 'Api\LinkController@index');
 Route::get('links/{category_id}', 'Api\LinkController@byCategory');
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('links/{link}/like', 'Api\LinkController@like')->name('links.like');
+    Route::post('links/{link}/unlike', 'Api\LinkController@unlike')->name('links.unlike');
+    Route::post('links/{link}/dislike', 'Api\LinkController@dislike')->name('links.dislike');
+    Route::post('links/{link}/undislike', 'Api\LinkController@undislike')->name('links.undislike');
+});
+

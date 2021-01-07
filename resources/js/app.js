@@ -1,22 +1,25 @@
 require('./bootstrap');
 
-import Vue from 'vue'
-import auth from './auth'
-import router from './router'
+import Vue from 'vue';
+import auth from './auth';
+import router from './router';
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import underscore from 'vue-underscore';
+Vue.use(underscore);
 
-import Vuetify from 'vuetify'
-Vue.use(Vuetify)
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+import Vuetify from 'vuetify';
+Vue.use(Vuetify);
 
 import VueMeta from 'vue-meta'
 Vue.use(VueMeta, {
-    refreshOnceOnNavigation: true
-})
+    refreshOnceOnNavigation: true,
+});
 
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
+import VueAxios from 'vue-axios';
+Vue.use(VueAxios, axios);
 
 import VueAuth               from '@websanova/vue-auth/src/v2.js';
 import driverAuthBearer      from '@websanova/vue-auth/src/drivers/auth/bearer.js';
