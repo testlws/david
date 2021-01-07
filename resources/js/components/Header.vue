@@ -4,13 +4,14 @@
         <v-toolbar-title>Coin Guide</v-toolbar-title>
         <v-spacer></v-spacer>
         <accountlinks></accountlinks>
-        <v-col cols="12" sm="6" md="3">
+        <v-col cols="12" sm="6" md="3" class="pr-0">
         <v-autocomplete
                 v-model="model"
                 :items="items"
                 :loading="isLoading"
                 :search-input.sync="search"
                 color="white"
+                clearable
                 hide-no-data
                 hide-selected
                 item-text="title"
@@ -26,14 +27,17 @@
 <template slot="item" slot-scope="{ item, tile }">
         <v-list-tile-content style="width:100%">
             <div class="float-left">{{ item.title }}</div>
-
-<v-chip
-      class="ma-1 float-right"
-      color="red"
-      text-color="white"
-    >
-      Red Chip
-    </v-chip>
+            <div class="float-right">
+<v-rating
+                                :value="parseFloat(item.score)"
+                                color="amber"
+                                dense
+                                half-increments
+                                readonly
+                                size="16"
+                                style="padding-bottom: 16px;"
+                                ></v-rating>
+                                </div>
         </v-list-tile-content>
     </template>
             </v-autocomplete>        
@@ -46,7 +50,7 @@
 
     export default {
     data: () => ({
-      titleLimit: 20,
+      titleLimit: 100,
       entries: [],
       isLoading: false,
       model: null,

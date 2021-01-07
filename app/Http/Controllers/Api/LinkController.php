@@ -13,7 +13,22 @@ class LinkController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $coll = LinkResource::collection(Link::orderBy('title')->get());
+        $links = Link::orderBy('title')->get();
+        foreach ($links as $link) {
+            $reactantFacade = $link->viaLoveReactant();
+            $link->liked = $reactantFacade->isReactedBy($user, 'Like');
+            $link->disliked = $reactantFacade->isReactedBy($user, 'Dislike');
+            $link->likes = $reactantFacade->getReactionCounterOfType('Like')->getCount();
+            $link->dislikes = $reactantFacade->getReactionCounterOfType('Dislike')->getCount();
+            $link->votes = $link->likes + $link->dislikes;
+            $link->score = '0.00';
+            if ($link->votes > 0) {
+                $link->score = round(5 * ($link->likes / $link->votes), 2);
+                $link->score = number_format($link->score, 2, '.', ',');
+            }
+        }
+
+        $coll = LinkResource::collection($links);
         return $coll;
     }
 

@@ -3353,6 +3353,146 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["setInteractionMode"])('eager');
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('digits', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["digits"]), {}, {
+  message: '{_field_} needs to be {length} digits. ({_value_})'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('required', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["required"]), {}, {
+  message: '{_field_} can not be empty'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('max', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["max"]), {}, {
+  message: '{_field_} may not be greater than {length} characters'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('regex', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["regex"]), {}, {
+  message: '{_field_} {_value_} does not match {regex}'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('email', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["email"]), {}, {
+  message: 'Email must be valid'
+}));
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_2__["ValidationProvider"],
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_2__["ValidationObserver"]
+  },
+  data: function data() {
+    return {
+      email: null,
+      has_error: false
+    };
+  },
+  methods: {
+    requestResetPassword: function requestResetPassword() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var isValid;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.$refs.observer.validate();
+
+              case 2:
+                isValid = _context.sent;
+
+                if (isValid) {
+                  _context.next = 5;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 5:
+                _this.$http.post("/auth/reset-password", {
+                  email: _this.email
+                }).then(function (result) {
+                  _this.response = result.data;
+                  console.log(result.data);
+                }, function (error) {
+                  console.error(error);
+                });
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/Login.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/Login.vue?vue&type=script&lang=js& ***!
@@ -3378,6 +3518,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3606,6 +3758,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["setInteractionMode"])('eager');
@@ -3627,6 +3785,25 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('regex', _objectSpre
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('email', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_1__["email"]), {}, {
   message: 'Email must be valid'
 }));
+
+var isUnique = function isUnique(value) {
+  console.log('isUnique - validation');
+  return axios.post('/auth/check-email', {
+    email: value
+  }).then(function (response) {
+    return {
+      valid: response.data.status == 'ok',
+      data: {
+        message: 'This email already exists'
+      }
+    };
+  });
+};
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('unique', {
+  validate: isUnique,
+  message: 'This email already exists'
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_2__["ValidationProvider"],
@@ -3643,32 +3820,6 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('email', _objectSpre
       errors: {},
       success: false
     };
-  },
-  created: function created() {
-    Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('emailAlreadyExists', {
-      getMessage: function getMessage(field) {
-        return field + ' already exists.';
-      },
-      validate: function validate(value) {
-        return new Promise(function (resolve) {
-          axios.get('/skills', {
-            email: value
-          }).then(function (response) {
-            console.log(response.data[0]);
-            resolve({
-              valid: response.data[0],
-              data: value !== 'trigger' ? undefined : {
-                message: 'Not this value'
-              }
-            });
-          })["catch"](function (error) {
-            // handle error
-            console.log(error);
-          }).then(function () {// always executed
-          });
-        });
-      }
-    });
   },
   methods: {
     register: function register() {
@@ -3741,16 +3892,36 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_2__["extend"])('email', _objectSpre
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _auth_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../auth.js */ "./resources/js/auth.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3792,178 +3963,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["setInteractionMode"])('eager');
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('confirmed', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["confirmed"]), {}, {
+  message: 'Password confirmation does not match the password'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('digits', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["digits"]), {}, {
+  message: '{_field_} needs to be {length} digits. ({_value_})'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["required"]), {}, {
+  message: '{_field_} can not be empty'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('max', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["max"]), {}, {
+  message: '{_field_} may not be greater than {length} characters'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('regex', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["regex"]), {}, {
+  message: '{_field_} {_value_} does not match {regex}'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('email', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_0__["email"]), {}, {
+  message: 'Email must be valid'
+}));
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__["ValidationProvider"],
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__["ValidationObserver"]
+  },
   data: function data() {
     return {
-      input: {
-        email: ''
-      },
-      message: '',
-      status: 'success',
-      loading: false,
-      show: false
+      token: null,
+      email: null,
+      password: null,
+      password_confirmation: null,
+      has_error: false
     };
   },
   methods: {
-    validate: function validate() {
-      this.loading = true;
-      this.submit();
-    },
-    submit: function submit() {
+    resetPassword: function resetPassword() {
       var _this = this;
 
-      _auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].emailLink(this.input).then(function (_ref) {
-        var data = _ref.data;
-        console.log(data);
-        _this.status = data.status;
-        _this.message = data.message;
-        _this.loading = false;
-        _this.show = true;
-      })["catch"](function (error) {
-        _this.loading = false;
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _auth_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../auth.js */ "./resources/js/auth.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['token'],
-  data: function data() {
-    return {
-      input: {
-        email: '',
-        password: '',
-        password_confirmation: ''
-      },
-      //Dialog Data
-      loading: false,
-      text: '',
-      //Alert Data
-      status: 'success',
-      message: '',
-      show: false
-    };
-  },
-  methods: {
-    validate: function validate() {
-      this.text = 'Resetting Password...';
-      this.loading = true;
-      this.submit();
-    },
-    submit: function submit() {
-      var _this = this;
-
-      _auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].resetPassword(this.input).then(function (_ref) {
-        var data = _ref.data;
-        _this.message = data.message;
-        _this.status = data.status;
-        _this.loading = false;
-        _this.show = true;
-
-        if (data.status === 'success') {
-          _this.text = 'Redirecting to Login Page...';
-          _this.loading = true;
-          setTimeout(function () {
-            _this.$router.push({
-              name: 'auth.login'
-            });
-          }, 2000);
-        }
-      })["catch"](function (error) {
-        _this.loading = false;
-        _this.show = false;
+      this.$http.post("/auth/reset/password", {
+        token: this.$route.params.token,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.password_confirmation
+      }).then(function (result) {
+        // console.log(result.data);
+        _this.$router.push({
+          name: 'login'
+        });
+      }, function (error) {
+        console.error(error);
       });
     }
   }
@@ -4043,11 +4092,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      titleLimit: 20,
+      titleLimit: 100,
       entries: [],
       isLoading: false,
       model: null,
@@ -32110,9 +32163,175 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("v-main", [_c("v-container", [_c("router-view")], 1)], 1),
+      _c(
+        "v-main",
+        [_c("v-container", { attrs: { fluid: "" } }, [_c("router-view")], 1)],
+        1
+      ),
       _vm._v(" "),
       _c("app-footer")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-layout",
+        {
+          staticClass: "justify-center",
+          attrs: { row: "", wrap: "", "mt-6": "" }
+        },
+        [
+          _c(
+            "v-flex",
+            {
+              attrs: { xs12: "", sm9: "", md5: "", lg4: "", "space-around": "" }
+            },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                    _c("h4", [_vm._v("Forgot my password")])
+                  ]),
+                  _vm._v(" "),
+                  _c("validation-observer", {
+                    ref: "observer",
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var invalid = ref.invalid
+                          return [
+                            _c(
+                              "v-form",
+                              {
+                                ref: "form",
+                                attrs: { "lazy-validation": "" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.requestResetPassword($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-card-text",
+                                  { staticClass: "text--primary" },
+                                  [
+                                    _c("validation-provider", {
+                                      attrs: {
+                                        name: "Email",
+                                        rules: "required|email"
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    "prepend-icon": "mdi-email",
+                                                    name: "Email",
+                                                    label: "Email",
+                                                    required: "",
+                                                    "error-messages": errors
+                                                  },
+                                                  model: {
+                                                    value: _vm.email,
+                                                    callback: function($$v) {
+                                                      _vm.email = $$v
+                                                    },
+                                                    expression: "email"
+                                                  }
+                                                })
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-card-actions",
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          type: "submit",
+                                          color: "info",
+                                          primary: "",
+                                          large: "",
+                                          block: ""
+                                        }
+                                      },
+                                      [
+                                        _vm._v("Send password reset link"),
+                                        _c(
+                                          "v-icon",
+                                          { attrs: { right: "", dark: "" } },
+                                          [
+                                            _vm._v(
+                                              "\r\n          mdi-email-send-outline\r\n        "
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -32151,11 +32370,12 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm9: "", md5: "", lg4: "" } },
+            {
+              attrs: { xs12: "", sm9: "", md5: "", lg4: "", "space-around": "" }
+            },
             [
               _c(
                 "v-card",
-                { attrs: { flat: "" } },
                 [
                   _c("v-card-title", { attrs: { "primary-title": "" } }, [
                     _c("h4", [_vm._v("Login")])
@@ -32302,40 +32522,70 @@ var render = function() {
                         }
                       }
                     ])
-                  }),
-                  _vm._v(" "),
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        {
+          staticClass: "justify-center",
+          attrs: { row: "", wrap: "", "mt-6": "" }
+        },
+        [
+          _c(
+            "v-flex",
+            {
+              attrs: { xs12: "", sm9: "", md5: "", lg4: "", "space-around": "" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "mt-8 pa-2 justify-center text-center" },
+                [
                   _c(
-                    "div",
-                    { staticClass: "mt-8 pa-2 justify-center text-center" },
+                    "v-card",
                     [
-                      _vm._v(
-                        "\r\n        You don't have an account on our site yet ?"
-                      ),
-                      _c("br"),
-                      _vm._v("\r\n        Create one for FREE !"),
-                      _c("br"),
+                      _c("v-card-title", [
+                        _vm._v(
+                          "\r\n        You don't have an account on our site yet ?\r\n        "
+                        )
+                      ]),
                       _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          staticClass: "mt-2",
-                          attrs: {
-                            type: "submit",
-                            color: "info",
-                            primary: "",
-                            large: "",
-                            block: "",
-                            link: "",
-                            to: { path: "/register" }
-                          }
-                        },
+                        "v-card-actions",
                         [
-                          _c("v-icon", { attrs: { left: "", dark: "" } }, [
-                            _vm._v(
-                              "\r\n          mdi-account-plus-outline\r\n        "
-                            )
-                          ]),
-                          _vm._v("\r\n        Register")
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mt-2",
+                              attrs: {
+                                type: "submit",
+                                color: "success",
+                                primary: "",
+                                large: "",
+                                block: "",
+                                link: "",
+                                to: { path: "/register" }
+                              }
+                            },
+                            [
+                              _c("v-icon", { attrs: { left: "", dark: "" } }, [
+                                _vm._v(
+                                  "\r\n          mdi-account-plus-outline\r\n        "
+                                )
+                              ]),
+                              _vm._v("\r\n        Register")
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -32345,8 +32595,7 @@ var render = function() {
                 ],
                 1
               )
-            ],
-            1
+            ]
           )
         ],
         1
@@ -32393,7 +32642,6 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { attrs: { flat: "" } },
                 [
                   _c("v-card-title", { attrs: { "primary-title": "" } }, [
                     _c("h4", [_vm._v("Create your account. It's FREE.")])
@@ -32471,8 +32719,7 @@ var render = function() {
                                         _c("validation-provider", {
                                           attrs: {
                                             name: "Email",
-                                            rules:
-                                              "required|email|emailAlreadyExists"
+                                            rules: "required|email|unique"
                                           },
                                           scopedSlots: _vm._u(
                                             [
@@ -32613,7 +32860,19 @@ var render = function() {
                                               block: ""
                                             }
                                           },
-                                          [_vm._v("Register")]
+                                          [
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { left: "", dark: "" } },
+                                              [
+                                                _vm._v(
+                                                  "\r\n          mdi-account-plus-outline\r\n        "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v("\r\n        Register")
+                                          ],
+                                          1
                                         )
                                       ],
                                       1
@@ -32647,10 +32906,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32663,349 +32922,224 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { attrs: { "align-center": "", "justify-center": "" } },
+    "v-container",
     [
       _c(
-        "v-flex",
-        { attrs: { xs12: "", sm8: "", md4: "" } },
-        [
-          _c(
-            "v-card",
-            { staticClass: "elevation-12" },
-            [
-              _c(
-                "v-toolbar",
-                { attrs: { dark: "", color: "primary" } },
-                [_c("v-toolbar-title", [_vm._v("Reset Password")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-alert",
-                    {
-                      attrs: { dismissible: "", type: _vm.status },
-                      model: {
-                        value: _vm.show,
-                        callback: function($$v) {
-                          _vm.show = $$v
-                        },
-                        expression: "show"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.message) +
-                          "\n            "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-form",
-                    { attrs: { "aria-label": "Reset Password" } },
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Email", name: "email" },
-                                model: {
-                                  value: _vm.input.email,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.input, "email", $$v)
-                                  },
-                                  expression: "input.email"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "primary", loading: _vm.loading },
-                          on: { click: _vm.validate }
-                        },
-                        [
-                          _vm._v(
-                            "\n                Send Reset Link\n              "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        { attrs: { to: { name: "auth.login" } } },
-                        [_vm._v("Login")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-layout",
-    { attrs: { "align-center": "", "justify-center": "" } },
-    [
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", sm8: "", md4: "" } },
-        [
-          _c(
-            "v-card",
-            { staticClass: "elevation-12" },
-            [
-              _c(
-                "v-toolbar",
-                { attrs: { dark: "", color: "primary" } },
-                [_c("v-toolbar-title", [_vm._v("Reset Password")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-alert",
-                    {
-                      attrs: { type: _vm.status, dismissible: "" },
-                      model: {
-                        value: _vm.show,
-                        callback: function($$v) {
-                          _vm.show = $$v
-                        },
-                        expression: "show"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n          " + _vm._s(_vm.message) + "\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-form",
-                    { attrs: { "aria-label": "Reset Password" } },
-                    [
-                      _c("input", {
-                        attrs: { type: "hidden", name: "token" },
-                        domProps: { value: _vm.token }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required|email|max:255",
-                                    expression: "'required|email|max:255'"
-                                  }
-                                ],
-                                attrs: {
-                                  "data-vv-name": "email",
-                                  "error-messages": _vm.errors.collect("email"),
-                                  label: "Email",
-                                  name: "email"
-                                },
-                                model: {
-                                  value: _vm.input.email,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.input, "email", $$v)
-                                  },
-                                  expression: "input.email"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required|min:6",
-                                    expression: "'required|min:6'"
-                                  }
-                                ],
-                                ref: "password",
-                                attrs: {
-                                  "data-vv-name": "password",
-                                  "error-messages": _vm.errors.collect(
-                                    "password"
-                                  ),
-                                  type: "password",
-                                  label: "Password",
-                                  name: "password"
-                                },
-                                model: {
-                                  value: _vm.input.password,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.input, "password", $$v)
-                                  },
-                                  expression: "input.password"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required|confirmed:password",
-                                    expression: "'required|confirmed:password'"
-                                  }
-                                ],
-                                attrs: {
-                                  "data-vv-as": "password",
-                                  type: "password",
-                                  label: "Password Confirm",
-                                  name: "password_confirmation"
-                                },
-                                model: {
-                                  value: _vm.input.password_confirmation,
-                                  callback: function($$v) {
-                                    _vm.$set(
-                                      _vm.input,
-                                      "password_confirmation",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "input.password_confirmation"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "primary", loading: _vm.loading },
-                          on: { click: _vm.validate }
-                        },
-                        [_vm._v("\n            Reset Password\n          ")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
+        "v-layout",
         {
-          attrs: { width: "300" },
-          model: {
-            value: _vm.loading,
-            callback: function($$v) {
-              _vm.loading = $$v
-            },
-            expression: "loading"
-          }
+          staticClass: "justify-center",
+          attrs: { row: "", wrap: "", "mt-6": "" }
         },
         [
           _c(
-            "v-card",
+            "v-flex",
+            { attrs: { xs12: "", sm9: "", md5: "", lg4: "" } },
             [
               _c(
-                "v-card-text",
+                "v-card",
                 [
-                  _vm._v("\n        " + _vm._s(_vm.text) + "\n        "),
-                  _c("v-progress-linear", {
-                    staticClass: "mb-0",
-                    attrs: { indeterminate: "" }
+                  _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                    _c("h4", [_vm._v("Reset your password")])
+                  ]),
+                  _vm._v(" "),
+                  _c("validation-observer", {
+                    ref: "observer",
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var invalid = ref.invalid
+                          return [
+                            !_vm.success
+                              ? _c(
+                                  "v-form",
+                                  {
+                                    ref: "form",
+                                    attrs: {
+                                      autocomplete: "off",
+                                      method: "post"
+                                    },
+                                    on: {
+                                      submit: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.resetPassword($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "v-card-text",
+                                      { staticClass: "text--primary" },
+                                      [
+                                        _c("validation-provider", {
+                                          attrs: {
+                                            name: "Email",
+                                            rules: "required|email"
+                                          },
+                                          scopedSlots: _vm._u(
+                                            [
+                                              {
+                                                key: "default",
+                                                fn: function(ref) {
+                                                  var errors = ref.errors
+                                                  return [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "prepend-icon":
+                                                          "mdi-email",
+                                                        name: "email",
+                                                        label: "Email",
+                                                        required: "",
+                                                        "error-messages": errors
+                                                      },
+                                                      model: {
+                                                        value: _vm.email,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.email = $$v
+                                                        },
+                                                        expression: "email"
+                                                      }
+                                                    })
+                                                  ]
+                                                }
+                                              }
+                                            ],
+                                            null,
+                                            true
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _c("validation-provider", {
+                                          attrs: {
+                                            name: "Password",
+                                            rules: "required",
+                                            vid: "password"
+                                          },
+                                          scopedSlots: _vm._u(
+                                            [
+                                              {
+                                                key: "default",
+                                                fn: function(ref) {
+                                                  var errors = ref.errors
+                                                  return [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "prepend-icon":
+                                                          "mdi-lock",
+                                                        name: "password",
+                                                        label: "Password",
+                                                        type: "password",
+                                                        required: "",
+                                                        "error-messages": errors
+                                                      },
+                                                      model: {
+                                                        value: _vm.password,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.password = $$v
+                                                        },
+                                                        expression: "password"
+                                                      }
+                                                    })
+                                                  ]
+                                                }
+                                              }
+                                            ],
+                                            null,
+                                            true
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _c("validation-provider", {
+                                          attrs: {
+                                            name: "Password confirmation",
+                                            rules: "required|confirmed:password"
+                                          },
+                                          scopedSlots: _vm._u(
+                                            [
+                                              {
+                                                key: "default",
+                                                fn: function(ref) {
+                                                  var errors = ref.errors
+                                                  return [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "prepend-icon":
+                                                          "mdi-lock",
+                                                        name:
+                                                          "password_confirmation",
+                                                        label:
+                                                          "Password confirmation",
+                                                        type: "password",
+                                                        required: "",
+                                                        "error-messages": errors
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.password_confirmation,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.password_confirmation = $$v
+                                                        },
+                                                        expression:
+                                                          "password_confirmation"
+                                                      }
+                                                    })
+                                                  ]
+                                                }
+                                              }
+                                            ],
+                                            null,
+                                            true
+                                          )
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              type: "submit",
+                                              color: "info",
+                                              primary: "",
+                                              large: "",
+                                              block: ""
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { left: "", dark: "" } },
+                                              [
+                                                _vm._v(
+                                                  "\r\n          mdi-account-plus-outline\r\n        "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v("\r\n        Update")
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ]
+                        }
+                      }
+                    ])
                   })
                 ],
                 1
@@ -33095,7 +33229,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-col",
-        { attrs: { cols: "12", sm: "6", md: "3" } },
+        { staticClass: "pr-0", attrs: { cols: "12", sm: "6", md: "3" } },
         [
           _c("v-autocomplete", {
             attrs: {
@@ -33103,6 +33237,7 @@ var render = function() {
               loading: _vm.isLoading,
               "search-input": _vm.search,
               color: "white",
+              clearable: "",
               "hide-no-data": "",
               "hide-selected": "",
               "item-text": "title",
@@ -33139,15 +33274,24 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c(
-                          "v-chip",
-                          {
-                            staticClass: "ma-1 float-right",
-                            attrs: { color: "red", "text-color": "white" }
-                          },
-                          [_vm._v("\n      Red Chip\n    ")]
+                          "div",
+                          { staticClass: "float-right" },
+                          [
+                            _c("v-rating", {
+                              staticStyle: { "padding-bottom": "16px" },
+                              attrs: {
+                                value: parseFloat(item.score),
+                                color: "amber",
+                                dense: "",
+                                "half-increments": "",
+                                readonly: "",
+                                size: "16"
+                              }
+                            })
+                          ],
+                          1
                         )
-                      ],
-                      1
+                      ]
                     )
                   ]
                 }
@@ -33165,34 +33309,6 @@ var render = function() {
         1
       )
     ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-app",
-    [_c("v-content", [_c("v-container", [_c("router-view")], 1)], 1)],
     1
   )
 }
@@ -33696,12 +33812,12 @@ var render = function() {
                                   _c("v-rating", {
                                     staticStyle: { "padding-bottom": "16px" },
                                     attrs: {
-                                      value: parseInt(link.score),
+                                      value: parseFloat(link.score),
                                       color: "amber",
                                       dense: "",
                                       "half-increments": "",
                                       readonly: "",
-                                      size: "14"
+                                      size: "16"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -96238,6 +96354,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Auth/ForgotPassword.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Auth/ForgotPassword.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ForgotPassword.vue?vue&type=template&id=01914daa& */ "./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa&");
+/* harmony import */ var _ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForgotPassword.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Auth/ForgotPassword.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgotPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgotPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgotPassword.vue?vue&type=template&id=01914daa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgotPassword.vue?vue&type=template&id=01914daa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgotPassword_vue_vue_type_template_id_01914daa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Auth/Login.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/Auth/Login.vue ***!
@@ -96376,17 +96561,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ResetEmail.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/Auth/ResetEmail.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetEmail.vue?vue&type=template&id=701320d9& */ "./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9&");
-/* harmony import */ var _ResetEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetEmail.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPasswordForm.vue?vue&type=template&id=62eaacd2& */ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&");
+/* harmony import */ var _ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPasswordForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -96396,9 +96581,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ResetEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -96408,107 +96593,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Auth/ResetEmail.vue"
+component.options.__file = "resources/js/components/Auth/ResetPasswordForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetEmail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetEmail.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetEmail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPasswordForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetEmail.vue?vue&type=template&id=701320d9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetEmail.vue?vue&type=template&id=701320d9&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPasswordForm.vue?vue&type=template&id=62eaacd2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetEmail_vue_vue_type_template_id_701320d9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Auth/ResetPassword.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/Auth/ResetPassword.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=template&id=710358ee& */ "./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee&");
-/* harmony import */ var _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPassword.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Auth/ResetPassword.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPassword.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPassword.vue?vue&type=template&id=710358ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPassword.vue?vue&type=template&id=710358ee&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPassword_vue_vue_type_template_id_710358ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -96647,59 +96763,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_1f42fb90___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_1f42fb90___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Layouts/AuthLayout.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/Layouts/AuthLayout.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AuthLayout.vue?vue&type=template&id=55d12ffa& */ "./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Layouts/AuthLayout.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AuthLayout.vue?vue&type=template&id=55d12ffa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Layouts/AuthLayout.vue?vue&type=template&id=55d12ffa&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AuthLayout_vue_vue_type_template_id_55d12ffa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -97118,15 +97181,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Homepage_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Homepage.vue */ "./resources/js/pages/Homepage.vue");
 /* harmony import */ var _pages_About_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/About.vue */ "./resources/js/pages/About.vue");
 /* harmony import */ var _pages_Contact_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Contact.vue */ "./resources/js/pages/Contact.vue");
-/* harmony import */ var _components_Sidebar_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Sidebar.vue */ "./resources/js/components/Sidebar.vue");
-/* harmony import */ var _components_Layouts_AuthLayout_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Layouts/AuthLayout.vue */ "./resources/js/components/Layouts/AuthLayout.vue");
-/* harmony import */ var _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Auth/Register.vue */ "./resources/js/components/Auth/Register.vue");
-/* harmony import */ var _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Auth/Login.vue */ "./resources/js/components/Auth/Login.vue");
-/* harmony import */ var _components_Auth_ResetEmail_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Auth/ResetEmail.vue */ "./resources/js/components/Auth/ResetEmail.vue");
-/* harmony import */ var _components_Auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Auth/ResetPassword.vue */ "./resources/js/components/Auth/ResetPassword.vue");
-/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue");
-
-
+/* harmony import */ var _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Auth/Register.vue */ "./resources/js/components/Auth/Register.vue");
+/* harmony import */ var _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Auth/Login.vue */ "./resources/js/components/Auth/Login.vue");
+/* harmony import */ var _components_Auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Auth/ForgotPassword.vue */ "./resources/js/components/Auth/ForgotPassword.vue");
+/* harmony import */ var _components_Auth_ResetPasswordForm_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Auth/ResetPasswordForm.vue */ "./resources/js/components/Auth/ResetPasswordForm.vue");
+/* harmony import */ var _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue");
 
 
 
@@ -97157,20 +97216,34 @@ var routes = [{
 }, {
   path: '/login',
   name: 'login',
-  component: _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+  component: _components_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   meta: {
     auth: false
   }
 }, {
   path: '/register',
   name: 'register',
-  component: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  component: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  meta: {
+    auth: false
+  }
+}, {
+  path: '/reset-password',
+  name: 'reset-password',
+  component: _components_Auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  meta: {
+    auth: false
+  }
+}, {
+  path: '/reset-password/:token',
+  name: 'reset-password-form',
+  component: _components_Auth_ResetPasswordForm_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
   meta: {
     auth: false
   }
 }, {
   path: '*',
-  component: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _components_NotFound_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   history: true,

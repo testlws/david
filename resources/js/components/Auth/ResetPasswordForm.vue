@@ -4,25 +4,18 @@
       <v-flex xs12 sm9 md5 lg4>
         <v-card>
             <v-card-title primary-title>
-              <h4>Create your account. It's FREE.</h4>
+              <h4>Reset your password</h4>
             </v-card-title>
 <validation-observer
     ref="observer"
     v-slot="{ invalid }"
   >
-            <v-form ref="form" autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
+            <v-form ref="form" autocomplete="off" @submit.prevent="resetPassword" v-if="!success" method="post">
               <v-card-text class="text--primary">
                 <validation-provider
         v-slot="{ errors }"
-        name="Name"
-        rules="required"
-      >
-                <v-text-field prepend-icon="mdi-email" name="name" label="Name" v-model="name" required :error-messages="errors"></v-text-field>
-                </validation-provider>
-                <validation-provider
-        v-slot="{ errors }"
         name="Email"
-        rules="required|email|unique"
+        rules="required|email"
       >
                 <v-text-field prepend-icon="mdi-email" name="email" label="Email" v-model="email" required :error-messages="errors"></v-text-field>
                 </validation-provider>
@@ -49,7 +42,7 @@
         >
           mdi-account-plus-outline
         </v-icon>
-        Register</v-btn>
+        Update</v-btn>
               </v-card-actions>
             </v-form>
             </validation-observer>
@@ -93,23 +86,6 @@ extend('digits', {
     message: 'Email must be valid',
   })
 
-  const isUnique = (value) => {
-    console.log('isUnique - validation')
-    return axios.post('/auth/check-email', { email: value }).then((response) => {
-      return {
-        valid: (response.data.status == 'ok'),
-        data: {
-          message: 'This email already exists'
-        }
-      };
-    });
-  };
-
-  extend('unique', {
-    validate: isUnique,
-    message: 'This email already exists'
-  });
-
   export default {
     components: {
       ValidationProvider,
@@ -117,55 +93,28 @@ extend('digits', {
     },    
     data() {
       return {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-        has_error: false,
-        error: '',
-        errors: {},
-        success: false
+        token: null,
+        email: null,
+        password: null,
+        password_confirmation: null,
+        has_error: false
       }
     },
     methods: {
-      async register() {
-        const isValid = await this.$refs.observer.validate();
-        if (!isValid) return
-
-        var redirectObj = this.$auth.redirect()
-        var app = this
-
-        this.$auth.register({
-          data: {
-            name: app.name,
-            email: app.email,
-            password: app.password,
-            password_confirmation: app.password_confirmation
-          }}).then((response) => {
-            app.success = true
-            this.$auth.login({
-              rememberMe: true,
-              fetchUser: true,
-              data: {
-                email: app.email,
-                password: app.password
-              },
-              redirect: {
-                path: this.from ? this.from : (redirectObj ? redirectObj.from.path : '/')
-              },
-            }).then((response) => {
-            }).catch((error) => {
-                console.log(error.response)
-                app.has_error = true
-            });        
-            
-        }).catch((error) => {
-            console.log(error)
-            app.has_error = true
-            app.error = error
-            app.errors = error.response.data.errors || {}
-        });
-      }
+        resetPassword() {
+            this.$http.post("/auth/reset/password", {
+                token: this.$route.params.token,
+                email: this.email,
+                password: this.password,
+                password_confirmation: this.password_confirmation
+            })
+            .then(result => {
+                // console.log(result.data);
+                this.$router.push({name: 'login'})
+            }, error => {
+                console.error(error);
+            });
+        }
     }
   }
 </script>

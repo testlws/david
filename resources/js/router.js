@@ -3,12 +3,10 @@ import VueRouter from 'vue-router'
 import Homepage from './pages/Homepage.vue'
 import About from './pages/About.vue'
 import Contact from './pages/Contact.vue'
-import Sidebar from './components/Sidebar.vue'
-import AuthLayout from './components/Layouts/AuthLayout.vue'
 import Register from './components/Auth/Register.vue'
 import Login from './components/Auth/Login.vue'
-import ResetEmail from './components/Auth/ResetEmail.vue'
-import ResetPassword from './components/Auth/ResetPassword.vue'
+import ForgotPassword from './components/Auth/ForgotPassword.vue'
+import ResetPasswordForm from './components/Auth/ResetPasswordForm.vue'
 import NotFound from './components/NotFound.vue'
 
 // Routes
@@ -50,6 +48,22 @@ const routes = [
             auth: false
         }                    
     },
+    { 
+        path: '/reset-password', 
+        name: 'reset-password', 
+        component: ForgotPassword, 
+        meta: { 
+        auth:false 
+        } 
+    },
+    { 
+        path: '/reset-password/:token', 
+        name: 'reset-password-form', 
+        component: ResetPasswordForm, 
+        meta: { 
+        auth:false 
+        } 
+    },    
     {path: '*', component: NotFound}
 ]
 

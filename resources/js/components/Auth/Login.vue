@@ -2,8 +2,8 @@
 <v-container>
     <v-layout row wrap mt-6 class="justify-center">
       <!-- xs12 and sm12 to make it responsive = 12 columns on mobile and 6 columns from medium to XL layouts -->
-      <v-flex xs12 sm9 md5 lg4>
-          <v-card flat>
+      <v-flex xs12 sm9 md5 lg4 space-around>
+          <v-card>
             <v-card-title primary-title>
               <h4>Login</h4>
             </v-card-title>
@@ -39,10 +39,20 @@
             </v-card-actions>
             </v-form>
             </validation-observer>
+            </v-card>
+  </v-flex>
+    </v-layout>    <v-layout row wrap mt-6 class="justify-center">
+
+            <v-flex xs12 sm9 md5 lg4 space-around>
+
       <div class="mt-8 pa-2 justify-center text-center">
-        You don't have an account on our site yet ?<br/>
-        Create one for FREE !<br/>
-        <v-btn type="submit" color="info" class="mt-2" primary large block link :to="{ path: '/register'}">
+        <v-card>
+          <v-card-title>
+        You don't have an account on our site yet ?
+        </v-card-title>
+        
+        <v-card-actions>
+        <v-btn type="submit" color="success" class="mt-2" primary large block link :to="{ path: '/register'}">
 <v-icon
           left
           dark
@@ -50,6 +60,8 @@
           mdi-account-plus-outline
         </v-icon>
         Register</v-btn>
+        </v-card-actions>
+        </v-card>
       </div>
           </v-card>
       </v-flex>

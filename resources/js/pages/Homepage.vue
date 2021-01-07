@@ -41,12 +41,12 @@
                                 class="mx-0"
                             >
                                 <v-rating
-                                :value="parseInt(link.score)"
+                                :value="parseFloat(link.score)"
                                 color="amber"
                                 dense
                                 half-increments
                                 readonly
-                                size="14"
+                                size="16"
                                 style="padding-bottom: 16px;"
                                 ></v-rating>
 

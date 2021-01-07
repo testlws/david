@@ -5,7 +5,7 @@
         <app-header @toggle-drawer="$refs.navbar.drawer = !$refs.navbar.drawer"></app-header>
 
         <v-main>
-            <v-container>
+            <v-container fluid>
                 <router-view></router-view>
             </v-container>
         </v-main>
