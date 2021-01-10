@@ -13,7 +13,7 @@ class LinkController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $links = Link::orderBy('title')->get();
+        $links = Link::orderBy('title')->with('category')->get();
         foreach ($links as $link) {
             $reactantFacade = $link->viaLoveReactant();
             $link->liked = $reactantFacade->isReactedBy($user, 'Like');
@@ -36,7 +36,7 @@ class LinkController extends Controller
     {
         $user = auth()->user();
 
-        $links = Link::where('category_id', $category_id)->get();
+        $links = Link::where('category_id', $category_id)->with('category')->get();
         foreach ($links as $link) {
             $reactantFacade = $link->viaLoveReactant();
             $link->liked = $reactantFacade->isReactedBy($user, 'Like');

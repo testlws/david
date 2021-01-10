@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router'
 
 import Homepage from './pages/Homepage.vue'
+import Category from './pages/Category.vue'
+import Site from './pages/Site.vue'
 import About from './pages/About.vue'
 import Contact from './pages/Contact.vue'
 import Register from './components/Auth/Register.vue'
@@ -27,10 +29,16 @@ const routes = [
         component: Contact,
     },
     {
-        path: '/category/:id/offers',
+        path: '/category/:id/:slug',
         name: 'category',
         props: true,
-        component: Homepage
+        component: Category
+    },
+    {
+        path: '/link/:linkId/:slug',
+        name:'link',
+        props: true,
+        component: Site
     },
     {
         path: '/login',

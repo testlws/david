@@ -43,7 +43,7 @@
       </validation-provider>
               </v-card-text>
               <v-card-actions>
-                <v-btn type="submit" color="info" primary large block><v-icon
+                <v-btn :loadig="isLoading" type="submit" color="info" primary large block><v-icon
           left
           dark
         >
@@ -124,13 +124,16 @@ extend('digits', {
         has_error: false,
         error: '',
         errors: {},
-        success: false
+        success: false,
+        isLoading: false
       }
     },
     methods: {
       async register() {
         const isValid = await this.$refs.observer.validate();
         if (!isValid) return
+
+        this.isLoading=true;
 
         var redirectObj = this.$auth.redirect()
         var app = this
@@ -155,11 +158,13 @@ extend('digits', {
               },
             }).then((response) => {
             }).catch((error) => {
+                this.$router.push({ name: 'login'})
                 console.log(error.response)
                 app.has_error = true
             });        
             
         }).catch((error) => {
+            this.isLoading=false;
             console.log(error)
             app.has_error = true
             app.error = error

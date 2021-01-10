@@ -7,7 +7,7 @@
                 mandatory
                 color="indigo"
             >
-                <v-list-item v-for="(category, index) in categories" :key="`item-${index}`" :value="category.id" link :to="`/category/${category.id}/offers`">
+                <v-list-item v-for="(category, index) in categories" :key="`item-${index}`" :value="category.id" link :to="{ name: 'category', params: { id: category.id, slug: category.slug }}">
                     <v-list-item-icon>
                         <v-icon v-text="category.icon"></v-icon>
                     </v-list-item-icon>

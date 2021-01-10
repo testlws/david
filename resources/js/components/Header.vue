@@ -25,10 +25,12 @@
                 hide-details
         >
 <template slot="item" slot-scope="{ item, tile }">
-        <v-list-tile-content style="width:100%">
-            <div class="float-left">{{ item.title }}</div>
-            <div class="float-right">
+        <v-list-item-content style="width:100%">
+            <div class="float-left py-1">
+              <span class="body-2">{{ item.title }}</span><br/>
+              <div class="caption grey--text lighten-4"><v-icon small v-text="item.category.icon"></v-icon> {{ item.category.title }}</div>
 <v-rating
+                                v-if="item.votes > 0"
                                 :value="parseFloat(item.score)"
                                 color="amber"
                                 dense
@@ -37,8 +39,9 @@
                                 size="16"
                                 style="padding-bottom: 16px;"
                                 ></v-rating>
-                                </div>
-        </v-list-tile-content>
+
+            </div>
+        </v-list-item-content>
     </template>
             </v-autocomplete>        
         </v-col>
@@ -88,6 +91,14 @@
       }
     },
     watch: {
+      model(val,oldval) {
+           console.log(val)
+           if (val && val.id) {
+              var tmp = val;
+              this.model = [];
+              this.$router.push({ name: 'link', params: { linkId: tmp.id, slug: tmp.slug }})
+           }
+      },
       search (val) {
         // Items have already been loaded
         if (this.items.length > 0) return

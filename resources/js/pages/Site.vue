@@ -139,7 +139,7 @@
                     appear: false,
                     icon: 'mdi-account-circle',
                     text: 'You must be logged in.',
-                    color: 'warning',
+                    color: 'info',
                     timeout: 2500,
                     x: 'center',
                     y: 'bottom',
@@ -159,7 +159,6 @@
         methods: {
             like: function(link_id, index) {
                 if (!this.$auth.check()) {
-                    this.snackbar.text = 'You must be logged in to upvote sites';
                     this.snackbar.appear = true;
                     return
                 }
@@ -194,7 +193,6 @@
             },
             dislike: function(link_id) {
                 if (!this.$auth.check()) {
-                    this.snackbar.text = 'You must be logged in to downvote sites';
                     this.snackbar.appear = true;
                     return
                 }

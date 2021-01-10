@@ -1,5 +1,26 @@
 <template>
 <v-container>
+<v-snackbar
+  v-model="snackbar.appear"
+  :timeout="snackbar.timeout"
+  :color="snackbar.color"
+  :left="snackbar.x === 'left'"
+  :right="snackbar.x === 'right'"
+  :top="snackbar.y === 'top'"
+> 
+    <v-icon small>mdi-email-send-outline</v-icon> {{ snackbar.text }}
+<template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar.appear = false"
+        >
+          Close
+        </v-btn>
+      </template>
+      </v-snackbar>
+
     <v-layout row wrap mt-6 class="justify-center">
       <!-- xs12 and sm12 to make it responsive = 12 columns on mobile and 6 columns from medium to XL layouts -->
       <v-flex xs12 sm9 md5 lg4 space-around>
@@ -41,7 +62,12 @@
             </validation-observer>
             </v-card>
   </v-flex>
-    </v-layout>    <v-layout row wrap mt-6 class="justify-center">
+
+    </v-layout>    
+  <br/>
+    <div class="text-center"><v-icon small>mdi-lock-question</v-icon><router-link
+  :to="{ path: '/reset-password' }">Forgot my password</router-link></div>
+    <v-layout row wrap mt-6 class="justify-center">
 
             <v-flex xs12 sm9 md5 lg4 space-around>
 
@@ -109,7 +135,16 @@ extend('digits', {
         email: null,
         password: null,
         has_error: false,
-        from: this.$route.query.from
+        from: this.$route.query.from,
+        snackbar: {
+            appear: this.$route.query.resetLinkSent,
+            icon: 'mdi-email-send-outline',
+            text: 'A password reset link has been sent to your e-mail.',
+            color: 'success',
+            x: 'center',
+            y: 'bottom',
+            timeout: -1
+        },                
       }
     },
 
