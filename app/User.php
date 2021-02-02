@@ -8,8 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use App\Notifications\VerifyEmail;
 
-class User extends Authenticatable implements JWTSubject, ReacterableInterface
+class User extends Authenticatable implements JWTSubject, ReacterableInterface, MustVerifyEmail
 {
     use Notifiable;
     use Reacterable;
@@ -40,6 +41,11 @@ class User extends Authenticatable implements JWTSubject, ReacterableInterface
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail());
+    }
 
     /**
      * Override the mail body for reset password notification mail.

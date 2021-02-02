@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Registered;
 use Hash;
+use Route;
 
 class AuthController extends Controller
 {
@@ -38,7 +40,10 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->email_token = md5(now().$user->name.$user->email.$user->password);
         $user->save();
+        event(new Registered($user));
+
 
         return response()->json(['status' => 'success'], 200);
     }
@@ -48,7 +53,14 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
+            $user_verified = User::where('id', Auth::user()->id)->whereNotNull('email_verified_at')->exists();
+        
+            if ($user_verified) {
+                return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
+            } else {
+                $this->guard()->logout();
+                return response()->json(['error' => 'email_not_verified'], 401);
+            }
         }
 
         return response()->json(['error' => 'login_error'], 401);
@@ -81,9 +93,19 @@ class AuthController extends Controller
         }
     }
 
+    public function verifyEmail($user_id, $hash)
+    {
+        $user = User::where('id', $user_id)->where('email_token', $hash);
+        if (!$user->exists()) return redirect('/login?userNotFound=1');
+        $user = $user->first();
+        $user->markEmailAsVerified();
+        return redirect('/login?emailVerified=1');
+    }
+
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
+        $user->avatar = 'https://gravatar.com/avatar/'. md5($user->email) .'?s=40&d=robohash&r=x';
 
         return response()->json([
             'status' => 'success',

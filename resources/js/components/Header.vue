@@ -20,12 +20,10 @@
                 placeholder="Start typing to Search"
                 prepend-icon="mdi-database-search"
                 return-object
-                filled
-                dense
                 hide-details
         >
 <template slot="item" slot-scope="{ item, tile }">
-        <v-list-item-content style="width:100%">
+        <v-list-item-content style="width:100%;">
             <div class="float-left py-1">
               <span class="body-2">{{ item.title }}</span><br/>
               <div class="caption grey--text lighten-4"><v-icon small v-text="item.category.icon"></v-icon> {{ item.category.title }}</div>

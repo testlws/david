@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+    $user->avatar = 'https://gravatar.com/avatar/'. md5($user->email) .'?s=400&d=robohash&r=x';
+
+    return $user;
 });
+*/
+
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'auth:api'], function(){
     // Users
@@ -40,9 +48,8 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::get('products', 'Api\ProductController@index');
-Route::get('categories', 'Api\CategoryController@index');
-Route::get('links', 'Api\LinkController@index');
+Route::get('categories', 'Api\CategoryController@all');
+Route::get('links', 'Api\LinkController@all');
 Route::get('links/{category_id}', 'Api\LinkController@byCategory');
 
 Route::group(['middleware' => 'auth:api'], function(){
@@ -52,3 +59,9 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('links/{link}/undislike', 'Api\LinkController@undislike')->name('links.undislike');
 });
 
+Route::apiResources(
+	[
+		'link' => 'Api\LinkController',
+		'category' => 'Api\CategoryController'
+	]
+);

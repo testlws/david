@@ -1,5 +1,4 @@
 require('./bootstrap');
-
 import Vue from 'vue';
 import auth from './auth';
 import router from './router';
@@ -17,6 +16,8 @@ import VueMeta from 'vue-meta'
 Vue.use(VueMeta, {
     refreshOnceOnNavigation: true,
 });
+
+import store from './store';
 
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
@@ -39,18 +40,6 @@ Vue.use(VueAuth, {
     options: auth
 });
 
-
-//Vue.use(VueAuth, auth)
-
-/*
-Vue.use(auth, {
-    auth: driverAuthBearer,
-    http: driverHttpAxios,
-    router: driverRouterVueRouter,
-    rolesVar: 'role'
-});
-*/
-
 import App from './components/App.vue'
 
 export const vm = new Vue({
@@ -58,6 +47,7 @@ export const vm = new Vue({
     components: { 
         App,
     },
+    store: store,
     router: router,
     vuetify: new Vuetify()
 })

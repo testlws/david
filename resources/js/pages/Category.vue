@@ -1,39 +1,14 @@
 <template>
     <v-row>
-<v-snackbar
-  v-model="snackbar.appear"
-  :color="snackbar.color"
-  :timeout="snackbar.timeout"
-  :left="snackbar.x === 'left'"
-  :right="snackbar.x === 'right'"
-  :top="snackbar.y === 'top'"
-> 
-    {{ snackbar.text }}
-    <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          :to="{ path: '/login', query: { from: currentRoutePath }}"
-        >
-          Login
-        </v-btn>
-    </template>
-</v-snackbar>
         <sidebar v-bind:id=this.id v-bind:categories=this.categories v-bind:categoriesLoading=this.categoriesLoading></sidebar>
         <v-col cols="12" xs="12" md="9" class="mb-3">
             <v-row align="stretch">
+                <v-col cols="12"><span class="text-h6" style="color: #fff; background: rgba(177, 134, 253,0.1); border-left: 6px solid #b287fd; text-transform: uppercase; padding: 7px; padding-left: 15px; margin-top: 5px; display: block; position:relative;"><v-icon large style="color: #152a3c; font-size:50px; opacity:.5; position:absolute;right:10px;top:calc(50% - 3px);transform:translateY(-50%) rotate(-45deg);">{{ currentCategory[0].icon }}</v-icon> {{ currentCategory[0].title }}</span></v-col>
                 <v-col v-for="(link, index) in links" :key="link.id" lg="4" md="6" class="mb-4">
-                    <v-lazy
-        :options="{
-          threshold: .5
-        }"
-        min-height="200"
-        transition="fade-transition"
-      >
-                    <v-card class="h-100">
-                        <router-link :to="{ name: 'link', params: { linkId: link.id, slug: link.slug }}" class="d-block" v-ripple="{ center: true }"><v-img :src="`/storage/images/${link.image}`" alt=""/></router-link>
-                        <v-card-title>
-                            <router-link :to="{ name: 'link', params: { linkId: link.id, slug: link.slug }}">{{ link.title }}</router-link>
+                    <v-card class="h-100" dark style="background:rgba(0,0,0,0.5);">
+                        <router-link :to="{ name: 'link', params: { linkId: link.id, slug: link.slug }}" class="d-block" v-ripple="{ center: true }"><v-img lazy-src="/images/loader.png" :src="`/storage/images/${link.image}`" alt=""/></router-link>
+                        <v-card-title color="deep-purple accent-1">
+                            <router-link :to="{ name: 'link', params: { linkId: link.id, slug: link.slug }}" class="deep-purple--text text--accent-1">{{ link.title }}</router-link>
                         </v-card-title>
                         <v-card-text>
                             <v-row
@@ -42,7 +17,7 @@
                             >
                                 <v-rating
                                 :value="parseFloat(link.score)"
-                                color="amber"
+                                color="red lighten-1"
                                 dense
                                 half-increments
                                 readonly
@@ -60,7 +35,8 @@
       <v-btn :loading="likeLoading[index]" @click="like(link.id, index)" outlined
         text
         icon
-        class="ml-2"
+        style="border:0;"
+        class="ml-2 mr-1"
         color="green" dark
       >
         <v-icon dark left v-if="!link.liked">mdi-thumb-up-outline</v-icon>
@@ -70,7 +46,8 @@
       <v-btn @click="dislike(link.id, index)" outlined
         text
         icon
-        class="ml-2 ma-0"
+        style="border:0;"
+        class="ml-4 mr-1 ma-0"
         color="red" dark
       >
         <v-icon dark left v-if="!link.disliked">mdi-thumb-down-outline</v-icon>
@@ -78,7 +55,6 @@
       </v-btn> {{ link.dislikes }}
                             </v-card-actions>
                     </v-card>
-                    </v-lazy>
                 </v-col>
             </v-row>
         </v-col>
@@ -130,36 +106,39 @@
             },
             data() {
             return {
-                categories: [],
                 links: [],
                 likeLoading: {},
                 dislikeLoading: {},
-                categoriesLoading: true,
-                snackbar: {
-                    appear: false,
-                    icon: 'mdi-account-circle',
-                    text: 'You must be logged in.',
-                    color: 'info',
-                    timeout: 2500,
-                    x: 'center',
-                    y: 'bottom',
-                },                
             }
         },
         computed: {
+            snackbar: function() {
+                return this.$store.getters.snackbar;
+            },
+            categories: function() {
+                return this.$store.getters.categories;
+            },
+            categoriesLoading: function() {
+                return this.$store.getters.categoriesLoading;
+            },
             currentRoutePath: function() {
                 return this.$route.path;
             },
             currentCategory: function() {
                 if (this.id == undefined) return undefined;
                 var tmp = this.categories.filter(c => c.id == this.id);
+                this.$store.dispatch('SET_CURRENT_CATEGORY', tmp);
                 return tmp;
             }
         },
         methods: {
             like: function(link_id, index) {
                 if (!this.$auth.check()) {
+                    this.snackbar.color = "warning";
+                    this.snackbar.icon = 'mdi-alert-circle-outline';
+                    this.snackbar.text = 'You must be logged in to upvote sites';
                     this.snackbar.appear = true;
+                    this.$store.dispatch('SET_SNACKBAR', this.snackbar);
                     return
                 }
                 this.likeLoading[index] = true;
@@ -193,7 +172,11 @@
             },
             dislike: function(link_id) {
                 if (!this.$auth.check()) {
+                    this.snackbar.color = "warning";
+                    this.snackbar.icon = 'mdi-alert-circle-outline';
+                    this.snackbar.text = 'You must be logged in to downvote sites';
                     this.snackbar.appear = true;
+                    this.$store.dispatch('SET_SNACKBAR', this.snackbar);
                     return
                 }
 
@@ -226,13 +209,6 @@
             },
         },
         mounted() {
-            axios.get('categories')
-                .then(response => {
-                    this.categories = response.data.data;
-                    this.categoriesLoading = false;
-                    this.$meta().refresh();
-            });
-
             if (this.id != undefined) {
                 axios.get('links/'+ this.id)
                     .then(response => {
@@ -246,6 +222,7 @@
                     .then(response => {
                         this.links = response.data.data;
                     });
+                //this.$meta().refresh();
             },
         },        
         components: {

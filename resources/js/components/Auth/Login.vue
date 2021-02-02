@@ -1,30 +1,11 @@
 <template>
 <v-container>
-<v-snackbar
-  v-model="snackbar.appear"
-  :timeout="snackbar.timeout"
-  :color="snackbar.color"
-  :left="snackbar.x === 'left'"
-  :right="snackbar.x === 'right'"
-  :top="snackbar.y === 'top'"
-> 
-    <v-icon small>mdi-email-send-outline</v-icon> {{ snackbar.text }}
-<template v-slot:action="{ attrs }">
-        <v-btn
-          color="white"
-          text
-          v-bind="attrs"
-          @click="snackbar.appear = false"
-        >
-          Close
-        </v-btn>
-      </template>
-      </v-snackbar>
-
     <v-layout row wrap mt-6 class="justify-center">
       <!-- xs12 and sm12 to make it responsive = 12 columns on mobile and 6 columns from medium to XL layouts -->
       <v-flex xs12 sm9 md5 lg4 space-around>
-          <v-card>
+          <v-card dark style="background:rgba(0,0,0,0.2)">
+                  <div class="text-center float-right pa-4"><v-icon small class="mr-1">mdi-lock-question</v-icon><router-link
+  :to="{ path: '/reset-password' }" class="deep-purple--text text--accent-1">Forgot my password</router-link></div>
             <v-card-title primary-title>
               <h4>Login</h4>
             </v-card-title>
@@ -50,7 +31,7 @@
             </validation-provider>
             </v-card-text>
             <v-card-actions>
-              <v-btn type="submit" color="info" primary large block>Login        <v-icon
+              <v-btn :loading="isLoading" type="submit" color="info" primary large block>Login        <v-icon
           right
           dark
         >
@@ -65,14 +46,12 @@
 
     </v-layout>    
   <br/>
-    <div class="text-center"><v-icon small>mdi-lock-question</v-icon><router-link
-  :to="{ path: '/reset-password' }">Forgot my password</router-link></div>
     <v-layout row wrap mt-6 class="justify-center">
 
             <v-flex xs12 sm9 md5 lg4 space-around>
 
       <div class="mt-8 pa-2 justify-center text-center">
-        <v-card>
+        <v-card dark style="background:rgba(0,0,0,0.2)">
           <v-card-title>
         You don't have an account on our site yet ?
         </v-card-title>
@@ -130,31 +109,58 @@ extend('digits', {
       ValidationProvider,
       ValidationObserver,
     },    
+    computed: {
+      snackbar: function() {
+          return this.$store.getters.snackbar;
+      },
+    },
     data() {
       return {
         email: null,
         password: null,
         has_error: false,
+        isLoading: false,
         from: this.$route.query.from,
-        snackbar: {
-            appear: this.$route.query.resetLinkSent,
-            icon: 'mdi-email-send-outline',
-            text: 'A password reset link has been sent to your e-mail.',
-            color: 'success',
-            x: 'center',
-            y: 'bottom',
-            timeout: -1
-        },                
+        resetLinkSent: this.$route.query.resetLinkSent,
+        userNotFound: this.$route.query.userNotFound,
+        emailVerified: this.$route.query.emailVerified,
       }
     },
 
     mounted() {
+            if (this.resetLinkSent) {
+                this.snackbar.icon = 'mdi-email-send-outline';
+                this.snackbar.text = "A password reset link has been sent to your e-mail.";
+                this.snackbar.color = "info";
+                this.snackbar.actionBtn = true;
+                this.snackbar.appear = true;
+            }
+
+            if (this.emailVerified) {
+                this.snackbar.icon = 'mdi-email-check-outline';
+                this.snackbar.text = "Your e-mail address has been verified.";
+                this.snackbar.color = "success";
+                this.snackbar.actionBtn = true;
+                this.snackbar.appear = true;
+            }
+
+            if (this.userNotFound) {
+                this.snackbar.icon = 'mdi-alert-circle-outline';
+                this.snackbar.text = "This user could not be found.";
+                this.snackbar.color = "error";
+                this.snackbar.actionBtn = true;
+                this.snackbar.appear = true;
+            }
+
+            this.$store.dispatch('SET_SNACKBAR', this.snackbar);
     },
 
     methods: {
       async login() {
         const isValid = await this.$refs.observer.validate();
         if (!isValid) return
+
+        this.isLoading=true;
 
         // get the redirect object
         var redirectObj = this.$auth.redirect()
@@ -174,6 +180,7 @@ extend('digits', {
 
 //            this.$router.push({name: redirectTo})
         }).catch((error) => {
+            this.isLoading=false;
             console.log(error.response)
             app.has_error = true
         });        

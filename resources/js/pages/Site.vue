@@ -130,11 +130,9 @@
             },
             data() {
             return {
-                categories: [],
                 links: [],
                 likeLoading: {},
                 dislikeLoading: {},
-                categoriesLoading: true,
                 snackbar: {
                     appear: false,
                     icon: 'mdi-account-circle',
@@ -147,6 +145,12 @@
             }
         },
         computed: {
+            categories: function() {
+                return this.$store.getters.categories;
+            },
+            categoriesLoading: function() {
+                return this.$store.getters.categoriesLoading;
+            },
             currentRoutePath: function() {
                 return this.$route.path;
             },
@@ -226,13 +230,6 @@
             },
         },
         mounted() {
-            axios.get('categories')
-                .then(response => {
-                    this.categories = response.data.data;
-                    this.categoriesLoading = false;
-                    this.$meta().refresh();
-            });
-
             if (this.id != undefined) {
                 axios.get('links/'+ this.id)
                     .then(response => {

@@ -1,29 +1,9 @@
 <template>
 <v-container>
-<v-snackbar
-  v-model="snackbar.appear"
-  :timeout="snackbar.timeout"
-  :color="snackbar.color"
-  :left="snackbar.x === 'left'"
-  :right="snackbar.x === 'right'"
-  :top="snackbar.y === 'top'"
-> 
-    <v-icon small>mdi-clock-time-five-outline</v-icon> {{ snackbar.text }}
-<template v-slot:action="{ attrs }">
-        <v-btn
-          color="white"
-          text
-          v-bind="attrs"
-          @click="snackbar.appear = false"
-        >
-          Close
-        </v-btn>
-      </template>
-      </v-snackbar>
     <v-layout row wrap mt-6 class="justify-center">
       <!-- xs12 and sm12 to make it responsive = 12 columns on mobile and 6 columns from medium to XL layouts -->
       <v-flex xs12 sm9 md5 lg4 space-around>
-          <v-card>
+          <v-card dark style="background:rgba(0,0,0,0.2)">
             <v-card-title primary-title>
               <h4>Forgot my password</h4>
             </v-card-title>
@@ -93,20 +73,16 @@ extend('digits', {
       ValidationProvider,
       ValidationObserver,
     },    
+    computed: {
+      snackbar: function() {
+          return this.$store.getters.snackbar;
+      },
+    },
     data() {
       return {
         email: null,
         has_error: false,
         isLoading: false,
-        snackbar: {
-            appear: false,
-            icon: 'mdi-clock-time-five-outline',
-            text: 'Please wait before retrying.',
-            color: 'warning',
-            x: 'center',
-            y: 'bottom',
-            timeout: -1
-        },        
       }
     },
     methods: {
@@ -123,9 +99,14 @@ extend('digits', {
           }, error => {
               this.isLoading=false;
               var data = error.response.data;
-              if (data.errors && data.errors.email.length) {
-                console.log(data.errors);
-                this.snackbar.appear=true;
+
+              if (data.errors && data.errors.email.length) {               
+                this.snackbar.icon = 'mdi-clock-time-five-outline';
+                this.snackbar.text = data.errors.email[0]
+                this.snackbar.color = "warning";
+                this.snackbar.actionBtn = true;
+                this.snackbar.appear = true;
+                this.$store.dispatch('SET_SNACKBAR', this.snackbar);
               }
           });
         }

@@ -1,24 +1,5 @@
 <template>
     <v-row>
-<v-snackbar
-  v-model="snackbar.appear"
-  :color="snackbar.color"
-  :timeout="snackbar.timeout"
-  :left="snackbar.x === 'left'"
-  :right="snackbar.x === 'right'"
-  :top="snackbar.y === 'top'"
-> 
-    {{ snackbar.text }}
-    <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          :to="{ path: '/login', query: { from: currentRoutePath }}"
-        >
-          Login
-        </v-btn>
-    </template>
-</v-snackbar>
         <sidebar v-bind:id=this.id v-bind:categories=this.categories v-bind:categoriesLoading=this.categoriesLoading></sidebar>
         <v-col cols="12" xs="12" md="9" class="mb-3">
             <v-row align="stretch">
@@ -129,24 +110,23 @@
                 }
             },
             data() {
-            return {
-                categories: [],
-                links: [],
-                likeLoading: {},
-                dislikeLoading: {},
-                categoriesLoading: true,
-                snackbar: {
-                    appear: false,
-                    icon: 'mdi-account-circle',
-                    text: 'You must be logged in.',
-                    color: 'warning',
-                    timeout: 2500,
-                    x: 'center',
-                    y: 'bottom',
-                },                
-            }
+                return {
+                    links: [],
+                    likeLoading: {},
+                    dislikeLoading: {},
+                    loggedOut: this.$route.query.loggedout,
+                }
         },
         computed: {
+            snackbar: function() {
+                return this.$store.getters.snackbar;
+            },
+            categories: function() {
+                return this.$store.getters.categories;
+            },
+            categoriesLoading: function() {
+                return this.$store.getters.categoriesLoading;
+            },
             currentRoutePath: function() {
                 return this.$route.path;
             },
@@ -159,6 +139,7 @@
         methods: {
             like: function(link_id, index) {
                 if (!this.$auth.check()) {
+                    this.snackbar.color = 'warning';
                     this.snackbar.text = 'You must be logged in to upvote sites';
                     this.snackbar.appear = true;
                     return
@@ -194,6 +175,7 @@
             },
             dislike: function(link_id) {
                 if (!this.$auth.check()) {
+                    this.snackbar.color = 'warning';
                     this.snackbar.text = 'You must be logged in to downvote sites';
                     this.snackbar.appear = true;
                     return
@@ -228,13 +210,6 @@
             },
         },
         mounted() {
-            axios.get('categories')
-                .then(response => {
-                    this.categories = response.data.data;
-                    this.categoriesLoading = false;
-                    this.$meta().refresh();
-            });
-
             if (this.id != undefined) {
                 axios.get('links/'+ this.id)
                     .then(response => {

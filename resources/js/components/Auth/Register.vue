@@ -2,7 +2,7 @@
 <v-container>
     <v-layout row wrap mt-6 class="justify-center">
       <v-flex xs12 sm9 md5 lg4>
-        <v-card>
+        <v-card dark style="background:rgba(0,0,0,0.2)">
             <v-card-title primary-title>
               <h4>Create your account. It's FREE.</h4>
             </v-card-title>
@@ -115,6 +115,11 @@ extend('digits', {
       ValidationProvider,
       ValidationObserver,
     },    
+    computed: {
+      snackbar: function() {
+          return this.$store.getters.snackbar;
+      },
+    },
     data() {
       return {
         name: '',

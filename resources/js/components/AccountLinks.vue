@@ -69,7 +69,7 @@
     },
     computed: {
       currentRoutePath() {
-          return this.$route.path;
+          return this.$route.path == '/login' ? '/' : this.$route.path;
       }
     },
     mounted() {
