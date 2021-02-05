@@ -5,69 +5,61 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        currentCategory: {},
-        categories: [],
-        categoriesLoading: false,
+        todos: [],
+        todosLoading: false,
         snackbar: {
-        appear: false,
-        icon: '',
-        text: '',
-        color: 'info',
-        x: 'center',
-        y: 'bottom',
-        timeout: 5000,
-        actionBtn: false
-      },
+            appear: false,
+            icon: '',
+            text: '',
+            color: 'info',
+            x: 'center',
+            y: 'bottom',
+            timeout: 5000,
+            actionBtn: false
+        },
     },
     getters: {
-        currentCategory: state => {
-            return state.currentCategory;
+        todosLoading: state => {
+            return state.todosLoading;
         },
-        categoriesLoading: state => {
-            return state.categoriesLoading;
-        },
-        categories: state => {
-            return state.categories;
+        todos: state => {
+            return state.todos;
         },
         snackbar: state => {
             return state.snackbar;
         }
     },
     mutations: {
-        SET_CURRENT_CATEGORY (state, currentCategory) {
-            state.currentCategory = currentCategory;
+        SET_TODOS_LOADING (state, todosLoading) {
+            state.todosLoading = todosLoading;
         },
-        SET_CATEGORIES_LOADING (state, categoriesLoading) {
-            state.categoriesLoading = categoriesLoading;
-        },
-        SET_CATEGORIES (state, categories) {
-            state.categories = categories;
+        SET_TODOS (state, todos) {
+            state.todos = todos;
         },
         SET_SNACKBAR (state, snackbar) {
             state.snackbar = snackbar;
         }
     },
     actions: {
-        SET_CURRENT_CATEGORY: function (context, currentCategory) {
-            context.commit('SET_CURRENT_CATEGORY', currentCategory)
-        },
         SET_SNACKBAR: function (context, snackbar) {
             context.commit('SET_SNACKBAR', snackbar)
         },
-        SET_CATEGORIES_LOADING: function (context, categoriesLoading) {
-            context.commit('SET_CATEGORIES_LOADING', categoriesLoading)
+        SET_TODOS_LOADING: function (context, todosLoading) {
+            context.commit('SET_TODOS_LOADING', todosLoading)
         },
-        LOAD_CATEGORIES: async function (context) {
-            if (context.state.categories.length > 0) return true;
+        LOAD_TODOS: async function (context) {
+            // if (context.state.todos.length > 0) return true;
 
-            context.dispatch('SET_CATEGORIES_LOADING', true);
-            axios.get('/categories').then((response) => {
-                context.commit('SET_CATEGORIES', response.data.data)
-                context.dispatch('SET_CATEGORIES_LOADING', false);
+            context.dispatch('SET_TODOS_LOADING', true);
+
+            axios.get('/todos').then((response) => {
+                console.log(response);
+                context.commit('SET_TODOS', response.data.data)
+                context.dispatch('SET_TODOS_LOADING', false);
                 return true;
             }, (err) => {
                 console.log(err)
-                context.dispatch('SET_CATEGORIES_LOADING', false);
+                context.dispatch('SET_TODOS_LOADING', false);
                 return false;
             })
         },

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugFieldToCategoriesTable extends Migration
+class CreateTodosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddSlugFieldToCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('slug')->nullable();
+        Schema::create('todos', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->timestamp('end_date')->nullable();
+            $table->boolean('done')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddSlugFieldToCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('todos');
     }
 }

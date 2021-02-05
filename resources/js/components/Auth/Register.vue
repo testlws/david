@@ -2,7 +2,7 @@
 <v-container>
     <v-layout row wrap mt-6 class="justify-center">
       <v-flex xs12 sm9 md5 lg4>
-        <v-card dark style="background:rgba(0,0,0,0.2)">
+        <v-card>
             <v-card-title primary-title>
               <h4>Create your account. It's FREE.</h4>
             </v-card-title>
@@ -151,23 +151,7 @@ extend('digits', {
             password_confirmation: app.password_confirmation
           }}).then((response) => {
             app.success = true
-            this.$auth.login({
-              rememberMe: true,
-              fetchUser: true,
-              data: {
-                email: app.email,
-                password: app.password
-              },
-              redirect: {
-                path: this.from ? this.from : (redirectObj ? redirectObj.from.path : '/')
-              },
-            }).then((response) => {
-            }).catch((error) => {
-                this.$router.push({ name: 'login'})
-                console.log(error.response)
-                app.has_error = true
-            });        
-            
+            this.$router.push({ name: 'login', query: { mustVerifyEmail: 1 }})
         }).catch((error) => {
             this.isLoading=false;
             console.log(error)

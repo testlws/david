@@ -17,6 +17,14 @@ Vue.use(VueMeta, {
     refreshOnceOnNavigation: true,
 });
 
+import moment from 'moment'
+
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('DD/MM/YYYY hh:mm')
+    }
+});
+
 import store from './store';
 
 import VueAxios from 'vue-axios';

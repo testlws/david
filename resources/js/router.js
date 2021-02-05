@@ -1,10 +1,6 @@
 import VueRouter from 'vue-router'
 
-import Homepage from './pages/Homepage.vue'
-import Category from './pages/Category.vue'
-import Site from './pages/Site.vue'
-import About from './pages/About.vue'
-import Contact from './pages/Contact.vue'
+import Todos from './pages/Todos.vue'
 import Register from './components/Auth/Register.vue'
 import Login from './components/Auth/Login.vue'
 import ForgotPassword from './components/Auth/ForgotPassword.vue'
@@ -15,30 +11,11 @@ import NotFound from './components/NotFound.vue'
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: Homepage,
-    },
-    {
-        path: '/about',
-        name: 'about',
-        component: About,
-    },
-    {
-        path: '/contact',
-        name: 'contact',
-        component: Contact,
-    },
-    {
-        path: '/category/:id/:slug',
-        name: 'category',
-        props: true,
-        component: Category
-    },
-    {
-        path: '/link/:linkId/:slug',
-        name:'link',
-        props: true,
-        component: Site
+        name: 'todos',
+        component: Todos,
+        meta: {
+            auth: true
+        }
     },
     {
         path: '/login',
@@ -61,7 +38,7 @@ const routes = [
         name: 'reset-password', 
         component: ForgotPassword, 
         meta: { 
-        auth:false 
+            auth:false 
         } 
     },
     { 
@@ -69,7 +46,7 @@ const routes = [
         name: 'reset-password-form', 
         component: ResetPasswordForm, 
         meta: { 
-        auth:false 
+            auth:false 
         } 
     },    
     {path: '*', component: NotFound}

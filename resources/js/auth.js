@@ -9,12 +9,12 @@ const config = {
   auth: driverAuthBearer,
   http: driverHttpAxios,
   router: driverRouterVueRouter,
-  tokenDefaultName: 'coinguide-spa',
+  tokenDefaultName: 'lws-spa',
   tokenStore: ['localStorage'],
   rolesVar: 'role',
   registerData: {url: 'auth/register', method: 'POST', redirect: '/login'},
-  loginData: {url: 'auth/login', method: 'POST', redirect: '/', fetchUser: true},
-  logoutData: {url: 'auth/logout', method: 'POST', redirect: '/?loggedout=1', makeRequest: true},
+  loginData: {url: 'auth/login', method: 'POST', redirect: '/?loggedIn=1', fetchUser: true},
+  logoutData: {url: 'auth/logout', method: 'POST', redirect: '/login?loggedOut=1', makeRequest: true},
   fetchData: {url: 'auth/user', method: 'GET', enabled: true},
   refreshData: {url: 'auth/refresh', method: 'GET', enabled: true, interval: 30}
 }

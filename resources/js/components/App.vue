@@ -1,9 +1,8 @@
 <template>
-    <v-app id="main">
-        <navbar ref="navbar"></navbar>
-        <app-header @toggle-drawer="$refs.navbar.drawer = !$refs.navbar.drawer" style="background-color: rgba(0, 0, 0, 0.2) !important;"></app-header>
+    <v-app id="main" style="background-color:#2a2a2a;">
+        <app-header @toggle-drawer="$refs.navbar.drawer = !$refs.navbar.drawer"></app-header>
 
-        <v-main style="background: url('/images/sidebar_bg1.jpg'); background-attachment: fixed; background-size:cover; background-position:bottom; background-repeat:no-repeat;">
+        <v-main>
             <v-container fluid>
                 <router-view></router-view>
                 <Snackbar></Snackbar>
@@ -37,7 +36,6 @@
             }
         },
         mounted() {
-            this.$store.dispatch('LOAD_CATEGORIES');
         },
         name: 'App',
         components: {

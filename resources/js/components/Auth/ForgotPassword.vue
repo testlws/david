@@ -3,7 +3,7 @@
     <v-layout row wrap mt-6 class="justify-center">
       <!-- xs12 and sm12 to make it responsive = 12 columns on mobile and 6 columns from medium to XL layouts -->
       <v-flex xs12 sm9 md5 lg4 space-around>
-          <v-card dark style="background:rgba(0,0,0,0.2)">
+          <v-card>
             <v-card-title primary-title>
               <h4>Forgot my password</h4>
             </v-card-title>

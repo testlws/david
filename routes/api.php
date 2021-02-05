@@ -14,16 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    $user = $request->user();
-    $user->avatar = 'https://gravatar.com/avatar/'. md5($user->email) .'?s=400&d=robohash&r=x';
-
-    return $user;
-});
-*/
-
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => 'auth:api'], function(){
     // Users
@@ -48,20 +39,11 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::get('categories', 'Api\CategoryController@all');
-Route::get('links', 'Api\LinkController@all');
-Route::get('links/{category_id}', 'Api\LinkController@byCategory');
-
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::post('links/{link}/like', 'Api\LinkController@like')->name('links.like');
-    Route::post('links/{link}/unlike', 'Api\LinkController@unlike')->name('links.unlike');
-    Route::post('links/{link}/dislike', 'Api\LinkController@dislike')->name('links.dislike');
-    Route::post('links/{link}/undislike', 'Api\LinkController@undislike')->name('links.undislike');
+    Route::get('todos', 'Api\\TodoController@index');
+    Route::group(['prefix' => 'todos'], function () {
+        Route::post('create', 'Api\\TodoController@create');
+        Route::post('update/{id}', 'Api\\TodoController@update');
+        Route::delete('delete/{id}', 'Api\\TodoController@delete');
+    });
 });
-
-Route::apiResources(
-	[
-		'link' => 'Api\LinkController',
-		'category' => 'Api\CategoryController'
-	]
-);

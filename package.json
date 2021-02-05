@@ -24,6 +24,7 @@
     "dependencies": {
         "@websanova/vue-auth": "^4.1.0",
         "es6-promise": "^4.2.8",
+        "moment": "^2.29.1",
         "vue": "^2.6.11",
         "vue-axios": "^3.2.0",
         "vue-meta": "^2.4.0",

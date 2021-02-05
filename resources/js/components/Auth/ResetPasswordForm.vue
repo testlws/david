@@ -2,7 +2,7 @@
 <v-container>
     <v-layout row wrap mt-6 class="justify-center">
       <v-flex xs12 sm9 md5 lg4>
-        <v-card dark style="background:rgba(0,0,0,0.2)">
+        <v-card>
             <v-card-title primary-title>
               <h4>Reset your password</h4>
             </v-card-title>
