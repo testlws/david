@@ -118850,7 +118850,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_meta__WEBPACK_IMPORTED_MODULE
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('formatDate', function (value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_7___default()(String(value)).format('DD/MM/YYYY hh:mm');
+    return moment__WEBPACK_IMPORTED_MODULE_7___default()(String(value)).format('DD/MM/YYYY HH:mm');
   }
 });
 
